@@ -8,9 +8,10 @@ interface OwnProps {
 
 export const Table = ({searchResponse}: OwnProps): JSX.Element => {
 
-    console.log(searchResponse);
-    console.log(undefined === searchResponse);
 
+    if(undefined === searchResponse){
+       return <p>Search something</p>
+    }
 
     return <TableContainer component={Paper}>
         <TableMaterial sx={{minWidth: 650}} aria-label="simple table">
@@ -21,8 +22,7 @@ export const Table = ({searchResponse}: OwnProps): JSX.Element => {
                     <TableCell align="right">User</TableCell>
                 </TableRow>
             </TableHead>
-            {
-                searchResponse && searchResponse.items.map((item) => {
+            {searchResponse.items.map((item) => {
                     return <TableBody key={item.id}>
                         <TableRow
                             sx={{'&:last-child td, &:last-child th': {border: 0}}}

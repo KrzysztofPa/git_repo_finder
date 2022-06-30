@@ -6,7 +6,7 @@ import {SearchResponse} from "../../Api/api.types";
 
 export const App = (): JSX.Element => {
 
-    const [searchResponse, setSearchResponse] = useState<SearchResponse|undefined>(undefined)
+    const [searchResponse, setSearchResponse] = useState<SearchResponse | undefined>(undefined)
     const [elementsToShow, setElementsToShow] = useState<number>(10)
     const [pageNumber, setPageNumber] = useState<number>(1)
 
