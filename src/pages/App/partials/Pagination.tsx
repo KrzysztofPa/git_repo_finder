@@ -1,5 +1,14 @@
-export const Pagination = (): JSX.Element => {
+import {SearchResponse} from "../../../Api/api.types";
 
+interface OwnProps {
+    searchResponse:SearchResponse|undefined
+}
 
-    return <></>
+export const Pagination = ({searchResponse}:OwnProps): JSX.Element => {
+
+    if(undefined === searchResponse){
+        return <></>
+    }
+
+    return <>total: {searchResponse.total_count}</>
 }

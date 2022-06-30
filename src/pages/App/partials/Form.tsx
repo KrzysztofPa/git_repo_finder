@@ -1,14 +1,18 @@
 import {getData} from "../../../Api/api";
-import {ChangeEvent, FormEvent, useEffect, useState} from "react";
+import {ChangeEvent, Dispatch, FormEvent, useEffect, useState} from "react";
+import {SearchResponse} from "../../../Api/api.types";
 
 const languages = ["Go", "Java", "JavaScript"]
 
+interface OwnProps {
+    setSearchResponse:Dispatch<SearchResponse>
+}
 
-export const Form = (): JSX.Element => {
+export const Form = ({setSearchResponse}:OwnProps): JSX.Element => {
 
     const sendForm = (e:FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        getData(phrase, user, lang).then((response)=>{console.log(response.data)});
+        getData(phrase, user, lang).then((response)=>{setSearchResponse(response.data)});
     }
 
     useEffect(()=>{
