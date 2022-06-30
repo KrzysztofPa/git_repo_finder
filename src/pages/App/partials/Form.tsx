@@ -1,14 +1,25 @@
 import {getData} from "../../../Api/api";
 import {ChangeEvent, Dispatch, FormEvent, useEffect, useState} from "react";
 import {SearchResponse} from "../../../Api/api.types";
-import {Alert, Box, Button, FormControl, Grid, MenuItem, Select, SelectChangeEvent, TextField} from "@mui/material";
+import {
+    Alert,
+    Box,
+    Button,
+    CircularProgress,
+    FormControl,
+    Grid,
+    MenuItem,
+    Select,
+    SelectChangeEvent,
+    TextField, Typography
+} from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
 
 
 const languages = ["Go", "Java", "JavaScript"]
 
 interface OwnProps {
-    setSearchResponse: Dispatch<SearchResponse>
+    setSearchResponse: Dispatch<SearchResponse|"error">
 }
 
 export const Form = ({setSearchResponse}: OwnProps): JSX.Element => {
@@ -17,6 +28,7 @@ export const Form = ({setSearchResponse}: OwnProps): JSX.Element => {
     const [phrase, setPhrase] = useState<string>('');
     const [user, setUser] = useState<string>('');
     const [lang, setLang] = useState<string>(languages[0]);
+    const [isLoading, setIsLoading] = useState<boolean>(false)
 
     const sendForm = () => {
         if (0 === phrase.length || 0 === user.length ){
@@ -25,10 +37,14 @@ export const Form = ({setSearchResponse}: OwnProps): JSX.Element => {
         }
 
         setIsFormErrorVisible(false);
-
-        getData(phrase, user, lang).then((response) => {
+        setIsLoading(true)
+        getData(phrase, user, lang)
+            .then((response) => {
             setSearchResponse(response.data)
-        });
+        })
+            .catch(()=>{setSearchResponse("error")})
+            .finally(()=>{setIsLoading(false)})
+        ;
     }
 
     useEffect(() => {
@@ -101,9 +117,11 @@ export const Form = ({setSearchResponse}: OwnProps): JSX.Element => {
             fullWidth
             variant="contained"
             size="large"
-            sx={{mt: 3, mb: 2}}
+            sx={{mt: 3, mb: 2, display:"flex"}}
+
         >
-            Search <SearchIcon/>
+            {isLoading ? <CircularProgress />
+                : <Typography  sx={{mt: .4, mb: .7,}} variant="body1" gutterBottom component="div">Search <SearchIcon/> </Typography>}
         </Button>
         <Grid container justifyContent="flex-end">
             <Grid item>

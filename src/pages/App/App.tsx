@@ -7,12 +7,11 @@ import {Container, createTheme, CssBaseline, Grid, ThemeProvider} from "@mui/mat
 
 export const App = (): JSX.Element => {
 
-    const [searchResponse, setSearchResponse] = useState<SearchResponse | undefined>(undefined)
-    const [elementsToShow, setElementsToShow] = useState<number>(10)
+    const [searchResponse, setSearchResponse] = useState<SearchResponse | undefined | 'error'>(undefined)
+    const [elementsPerPage, setElementsPerPage] = useState<number>(10)
     const [pageNumber, setPageNumber] = useState<number>(1)
 
     const theme = createTheme();
-
 
     return (
         <ThemeProvider theme={theme}>
@@ -22,11 +21,15 @@ export const App = (): JSX.Element => {
             </Container>
 
             <Container maxWidth="xl">
-                <Table searchResponse={searchResponse}/>
+                <Table searchResponse={searchResponse} elementsPerPage={elementsPerPage} pageNumber={pageNumber}/>
             </Container>
 
             <Container maxWidth="xs">
-                <Pagination searchResponse={searchResponse}/>
+                <Pagination searchResponse={searchResponse}
+                            elementsPerPage={elementsPerPage}
+                            pageNumber={pageNumber}
+                            setElementsPerPage={setElementsPerPage}
+                            setPageNumber={setPageNumber}/>
             </Container>
 
         </ThemeProvider>
