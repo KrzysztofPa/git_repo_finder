@@ -1,6 +1,6 @@
 {
   "name": "git_repo_finder",
-  "homepage": "https://krzysztofpa.github.io/git_repo_finder/",
+  "homepage": "https://krzysztofpa.github.io/git_repo_finder",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
