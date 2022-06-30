@@ -19,7 +19,7 @@ export const Pagination = ({searchResponse, elementsPerPage, setElementsPerPage,
 
     useEffect(()=>{
         setPageNumber(1);
-    },[elementsPerPage])
+    },[elementsPerPage, searchResponse])
 
     useEffect(()=>{
         if("error" !== searchResponse && undefined !== searchResponse){
