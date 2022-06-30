@@ -22,7 +22,7 @@ export const Form = (): JSX.Element => {
 
     const [phrase, setPhrase]= useState<string>('');
     const [user, setUser]= useState<string>('');
-    const [lang, setLang]= useState<string>('');
+    const [lang, setLang]= useState<string>(languages[0]);
 
 
 

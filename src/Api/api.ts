@@ -13,7 +13,7 @@ export const getData = (phrase: string,username: string, lang: string):AxiosProm
 
     const createUrl = ()=>{
         phrase = phrase.split(' ').join('+');
-        const url = `${phrase}&user:${username}&language:${lang}`
+        const url = `${phrase} user:${username} language:${lang}`
         const maxQueryLength = 256;
         if(url.length > maxQueryLength){
             console.log('error');
@@ -21,5 +21,5 @@ export const getData = (phrase: string,username: string, lang: string):AxiosProm
         return url
     }
 
-    return gitInstance.get(`/search/code/&q=${encodeURIComponent(createUrl())}`)
+    return gitInstance.get(`/search/repositories?q=${createUrl()}`)
 }
