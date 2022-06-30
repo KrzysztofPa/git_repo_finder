@@ -1,6 +1,9 @@
 import {getData} from "../../../Api/api";
 import {ChangeEvent, Dispatch, FormEvent, useEffect, useState} from "react";
 import {SearchResponse} from "../../../Api/api.types";
+import {Alert, Box, Button, FormControl, Grid, MenuItem, Select, SelectChangeEvent, TextField} from "@mui/material";
+import SearchIcon from '@mui/icons-material/Search';
+
 
 const languages = ["Go", "Java", "JavaScript"]
 
@@ -10,12 +13,19 @@ interface OwnProps {
 
 export const Form = ({setSearchResponse}: OwnProps): JSX.Element => {
 
+    const [isFormErrorVisible, setIsFormErrorVisible] = useState<boolean>(false);
     const [phrase, setPhrase] = useState<string>('');
     const [user, setUser] = useState<string>('');
     const [lang, setLang] = useState<string>(languages[0]);
 
-    const sendForm = (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
+    const sendForm = () => {
+        if (0 === phrase.length || 0 === user.length ){
+            setIsFormErrorVisible(true);
+            return;
+        }
+
+        setIsFormErrorVisible(false);
+
         getData(phrase, user, lang).then((response) => {
             setSearchResponse(response.data)
         });
@@ -39,39 +49,65 @@ export const Form = ({setSearchResponse}: OwnProps): JSX.Element => {
         localStorage.setItem('user', e.target.value)
         setUser(e.target.value)
     }
-    const langChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    const langChange = (e: SelectChangeEvent<string>) => {
         localStorage.setItem('lang', e.target.value)
         setLang(e.target.value)
     }
 
-    return <form onSubmit={(e) => {
-        sendForm(e)
-    }}>
-        <label>
-            Phrase:
-            <input name='phrase'
-                   onChange={(e) => phraseChange(e)}
-                   value={phrase}
-                   required/>
-        </label>
-        <label>
-            User:
-            <input name='user'
-                   onChange={(e) => userChange(e)}
-                   value={user}
-                   required/>
-        </label>
-        <label>
-            Language:
-            <select name='language'
+    return <Box component="form" noValidate onSubmit={sendForm} sx={{mt: 3}}>
+        <Grid container spacing={2}>
+            <Grid item xs={12}>
+                <TextField
+                    autoFocus
+                    required
+                    fullWidth
+                    id="Phrase"
+                    label="Phrase"
+                    name="Phrase"
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => phraseChange(e)}
+                    value={phrase}
+                />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+                <TextField
+                    required
+                    fullWidth
+                    id="User"
+                    label="User"
+                    name="User"
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => userChange(e)}
+                    value={user}
+                />
+            </Grid>
+            <Grid item xs={12}  sm={6}>
+                <Select
+                    required
+                    fullWidth
+                    name="Language"
+                    label="Language"
+                    id="Language"
                     onChange={(e) => langChange(e)}
                     value={lang}
-                    required>
-                {languages.map((lang) => {
-                    return <option value={lang}>{lang}</option>
-                })}
-            </select>
-        </label>
-        <button type="submit"> Search</button>
-    </form>
+                >
+                    {languages.map((lang) => {
+                        return <MenuItem value={lang}>{lang}</MenuItem>
+                    })}
+                </Select>
+            </Grid>
+        </Grid>
+        {isFormErrorVisible && <Alert severity="error">something went wrong, fill all the fields</Alert>}
+        <Button
+            onClick={() => sendForm()}
+            fullWidth
+            variant="contained"
+            size="large"
+            sx={{mt: 3, mb: 2}}
+        >
+            Search <SearchIcon/>
+        </Button>
+        <Grid container justifyContent="flex-end">
+            <Grid item>
+            </Grid>
+        </Grid>
+    </Box>
 }
