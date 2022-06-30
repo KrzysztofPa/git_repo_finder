@@ -11,9 +11,6 @@ export const getData = (phrase: string, username: string, lang: string): AxiosPr
         phrase = phrase.split(' ').join('+');
         const url = `${phrase} user:${username} language:${lang}`
         const maxQueryLength = 256;
-        if (url.length > maxQueryLength) {
-            console.log('error');
-        }
         return url
     }
 

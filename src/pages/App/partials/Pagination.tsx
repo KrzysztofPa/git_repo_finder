@@ -27,7 +27,7 @@ export const Pagination = ({searchResponse, elementsPerPage, setElementsPerPage,
         }
     },[elementsPerPage,searchResponse])
 
-    if (undefined === searchResponse || "error" === searchResponse) {
+    if (undefined === searchResponse || "error" === searchResponse || 0 === searchResponse.total_count) {
         return <></>
     }
 
