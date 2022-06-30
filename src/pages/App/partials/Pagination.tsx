@@ -13,7 +13,7 @@ interface OwnProps {
 
 export const Pagination = ({searchResponse, elementsPerPage, setElementsPerPage,setPageNumber, pageNumber}: OwnProps): JSX.Element => {
 
-    const selectValuePerPages = [10, 20, 30, 50]
+    const selectValuePerPages = [2, 5, 10, 20, 30, 50]
 
     const [pages, setPages] = useState<number>( 1)
 
