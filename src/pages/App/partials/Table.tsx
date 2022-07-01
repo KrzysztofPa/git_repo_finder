@@ -48,7 +48,7 @@ export const Table = ({searchResponse}: OwnProps): JSX.Element => {
                         <TableCell>{item.name}
                         </TableCell>
                         <TableCell>
-                            <a href={item.html_url} ref="" target="_blank" rel="noopener noreferrer">
+                            <a href={item.html_url} target="_blank">
                                 <img src={ghLogo} alt="go to GitLab"/>
                             </a>
                         </TableCell>
@@ -56,7 +56,7 @@ export const Table = ({searchResponse}: OwnProps): JSX.Element => {
                             {item.repository.description}
                         </TableCell>
                         <TableCell align="right">
-                            <a href={item.repository.owner.avatar_url} target="_blank" rel="noopener noreferrer">{item.repository.owner.login}</a>
+                            <a href={item.repository.owner.avatar_url} target="_blank">{item.repository.owner.login}</a>
                         </TableCell>
                     </TableRow>
                 </TableBody>
