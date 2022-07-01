@@ -1,4 +1,4 @@
-#Welcome 
+# Welcome 
 This project allows you to browse the list of files in all repositories on github - using a form, selecting the user, language, and typing the name of the file you are looking for.
 
 It uses the github api, is built on React with TypeScript, MaterialUi was used for styling.
