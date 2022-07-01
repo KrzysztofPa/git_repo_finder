@@ -3,7 +3,7 @@ import {Table} from "./partials/Table";
 import {Pagination} from "./partials/Pagination";
 import {useState} from "react";
 import {SearchResponse} from "../../Api/api.types";
-import {Container, createTheme, CssBaseline, Grid, ThemeProvider} from "@mui/material";
+import {Container, createTheme, CssBaseline, ThemeProvider} from "@mui/material";
 
 export const App = (): JSX.Element => {
 
@@ -17,11 +17,14 @@ export const App = (): JSX.Element => {
         <ThemeProvider theme={theme}>
             <CssBaseline/>
             <Container component="main" maxWidth="xs">
-                <Form setSearchResponse={setSearchResponse}/>
+                <Form setSearchResponse={setSearchResponse}
+                    searchResponse={searchResponse}
+                    elementsPerPage={elementsPerPage}
+                    pageNumber={pageNumber}/>
             </Container>
 
             <Container maxWidth="xl">
-                <Table searchResponse={searchResponse} elementsPerPage={elementsPerPage} pageNumber={pageNumber}/>
+                <Table searchResponse={searchResponse}/>
             </Container>
 
             <Container maxWidth="xs">

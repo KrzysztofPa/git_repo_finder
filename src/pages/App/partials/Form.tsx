@@ -18,17 +18,28 @@ import SearchIcon from '@mui/icons-material/Search';
 
 const languages = ["Go", "Java", "JavaScript"]
 
+
 interface OwnProps {
     setSearchResponse: Dispatch<SearchResponse | "error">
+    elementsPerPage: number
+    pageNumber: number
+    searchResponse: SearchResponse | undefined | "error"
 }
 
-export const Form = ({setSearchResponse}: OwnProps): JSX.Element => {
+export const Form = ({setSearchResponse, elementsPerPage, pageNumber, searchResponse}: OwnProps): JSX.Element => {
 
     const [isFormErrorVisible, setIsFormErrorVisible] = useState<boolean>(false);
     const [phrase, setPhrase] = useState<string>('');
     const [user, setUser] = useState<string>('');
     const [lang, setLang] = useState<string>(languages[0]);
     const [isLoading, setIsLoading] = useState<boolean>(false)
+
+    useEffect(() => {
+        if (undefined !== searchResponse) {
+            sendForm();
+        }
+    }, [pageNumber, elementsPerPage])
+
 
     const sendForm = () => {
         if (0 === phrase.length || 0 === user.length) {
@@ -38,7 +49,7 @@ export const Form = ({setSearchResponse}: OwnProps): JSX.Element => {
 
         setIsFormErrorVisible(false);
         setIsLoading(true)
-        getData(phrase, user, lang)
+        getData(phrase, user, lang, elementsPerPage, pageNumber)
             .then((response) => {
                 setSearchResponse(response.data)
             })
@@ -110,7 +121,7 @@ export const Form = ({setSearchResponse}: OwnProps): JSX.Element => {
                     value={lang}
                 >
                     {languages.map((lang) => {
-                        return <MenuItem value={lang}>{lang}</MenuItem>
+                        return <MenuItem key={lang} value={lang}>{lang}</MenuItem>
                     })}
                 </Select>
             </Grid>
@@ -124,13 +135,15 @@ export const Form = ({setSearchResponse}: OwnProps): JSX.Element => {
             sx={{mt: 3, mb: 2, display: "flex"}}
 
         >
-            {isLoading ? <CircularProgress/>
-                : <Typography sx={{mt: .4, mb: .7,}} variant="body1" gutterBottom component="div">Search <SearchIcon/>
-                </Typography>}
-        </Button>
-        <Grid container justifyContent="flex-end">
-            <Grid item>
-            </Grid>
-        </Grid>
-    </Box>
-}
+            {isLoading ? <CircularProgress color="warning" size={24}/>
+                : <>
+                    <Typography sx={{mb:0}} variant="body1" gutterBottom component="div">Search</Typography>
+                    <SearchIcon sx={{verticalAlign: 'bottom'}}/>
+                </>}
+                </Button>
+                <Grid container justifyContent="flex-end">
+                <Grid item>
+                </Grid>
+                </Grid>
+                </Box>
+            }

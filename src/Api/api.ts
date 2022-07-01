@@ -5,14 +5,12 @@ const gitInstance = axios.create({
     baseURL: 'https://api.github.com/',
 });
 
-export const getData = (phrase: string, username: string, lang: string): AxiosPromise<SearchResponse> => {
+export const getData = (phrase: string, username: string, lang: string, perPage: number, page:number): AxiosPromise<SearchResponse> => {
 
     const createUrl = () => {
         phrase = phrase.split(' ').join('+');
-        const url = `${phrase} user:${username} language:${lang}`
-        const maxQueryLength = 256;
-        return url
+        return `${phrase} user:${username} language:${lang} page%3A3&per_page=${perPage}&page=${page}`
     }
 
-    return gitInstance.get(`/search/repositories?q=${createUrl()}`)
+    return gitInstance.get(`/search/code?q=${createUrl()}`)
 }

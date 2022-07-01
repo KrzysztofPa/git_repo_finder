@@ -1,6 +1,6 @@
 import {SearchResponse} from "../../../Api/api.types";
-import {Grid, MenuItem, Pagination as PaginationComponent, Select, TextField, Typography} from "@mui/material";
-import {ChangeEvent, Dispatch, useEffect, useState} from "react";
+import {Grid, MenuItem, Pagination as PaginationComponent, Select} from "@mui/material";
+import {Dispatch, useEffect, useState} from "react";
 
 
 interface OwnProps {
@@ -13,13 +13,9 @@ interface OwnProps {
 
 export const Pagination = ({searchResponse, elementsPerPage, setElementsPerPage,setPageNumber, pageNumber}: OwnProps): JSX.Element => {
 
-    const selectValuePerPages = [2, 5, 10, 20, 30, 50]
+    const selectValuePerPages = [10, 20, 30, 50, 100]
 
     const [pages, setPages] = useState<number>( 1)
-
-    useEffect(()=>{
-        setPageNumber(1);
-    },[elementsPerPage, searchResponse])
 
     useEffect(()=>{
         if("error" !== searchResponse && undefined !== searchResponse){
@@ -55,7 +51,7 @@ export const Pagination = ({searchResponse, elementsPerPage, setElementsPerPage,
                     value={elementsPerPage}
                 >
                     {selectValuePerPages.map((value) => {
-                        return <MenuItem value={value}>{value}</MenuItem>
+                        return <MenuItem key={value} value={value}>{value}</MenuItem>
                     })}
                 </Select>
             </Grid>

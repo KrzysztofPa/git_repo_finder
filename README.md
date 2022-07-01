@@ -1,6 +1,9 @@
-# Getting Started with Create React App
+#Welcome 
+This project allows you to browse the list of files in all repositories on github - using a form, selecting the user, language, and typing the name of the file you are looking for.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+It uses the github api, is built on React with TypeScript, MaterialUi was used for styling.
+
+For the project I focused on the main task and meeting the requirements - I believe that meeting the goals of the project and understanding the needs of the client is important.
 
 ## Available Scripts
 
@@ -11,36 +14,19 @@ In the project directory, you can run:
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Solution description
 
-### `npm test`
+The "App" component, is the component that stores the state of the entire application, using props it passes setters and objects to sub-components, thus handling inter-component communication.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+During the implementation of the task, I encountered several problems, including error detection, passing data without a central state (usually working in Redux, I treated this task as a challenge and a chance for development) and a problem with the extremely extensive, but fortunately detailed github API.
 
-### `npm run build`
+This was the first time I used MaterialUi, I didn't focus on the appearance, because I personally believe that the most important thing is to perform tasks, and any improvements and specific appearance of the application, it is worth to establish with the decision-makers.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+In general, I consider the task moderately difficult, it definitely requires some experience, but actually a little deeper dive into the documentation of github and the components I used, made the whole task completed in the actual time of about 4 hours.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## To-Do improve website
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Add application state centralization (redux)
+- Add translations (i18n)
+- Add night mode

@@ -13,11 +13,9 @@ import ghLogo from "../../../icons/ghLogo.svg"
 
 interface OwnProps {
     searchResponse: SearchResponse | undefined | "error"
-    elementsPerPage: number
-    pageNumber: number
 }
 
-export const Table = ({searchResponse, elementsPerPage, pageNumber}: OwnProps): JSX.Element => {
+export const Table = ({searchResponse}: OwnProps): JSX.Element => {
 
 
     if(undefined === searchResponse){
@@ -32,42 +30,36 @@ export const Table = ({searchResponse, elementsPerPage, pageNumber}: OwnProps): 
         return <Alert severity="warning">Nothing found</Alert>
     }
 
-    const minIdx = pageNumber * elementsPerPage-elementsPerPage
-    const maxIdx = pageNumber * elementsPerPage
-
     return <TableContainer component={Paper}>
         <TableMaterial sx={{minWidth: 650}} aria-label="simple table">
             <TableHead>
                 <TableRow>
-                    <TableCell>Project</TableCell>
+                    <TableCell>File</TableCell>
                     <TableCell>GitHub</TableCell>
                     <TableCell align="right">Description</TableCell>
                     <TableCell align="right">User</TableCell>
                 </TableRow>
             </TableHead>
             {searchResponse.items.map((item, idx) => {
-
-                    if(minIdx <= idx && maxIdx > idx){
-                        return <TableBody key={item.id + idx}>
+                        return <TableBody key={"id" + item.path + idx}>
                             <TableRow
                                 sx={{'&:last-child td, &:last-child th': {border: 0}}}
                             >
-                                <TableCell >{item.full_name}
+                                <TableCell >{item.name}
                                 </TableCell>
                                 <TableCell >
-                                    <a href={item.clone_url} target="_blank">
+                                    <a href={item.html_url} target="_blank">
                                         <img src={ghLogo} alt="go to GitLab" />
                                     </a>
                                 </TableCell>
                                 <TableCell align="right">
-                                    {item.description}
+                                    {item.repository.description}
                                 </TableCell>
                                 <TableCell align="right">
-                                    <a href={item.owner.avatar_url} target="_blank">{item.owner.login}</a>
+                                    <a href={item.repository.owner.avatar_url} target="_blank">{item.repository.owner.login}</a>
                                 </TableCell>
                             </TableRow>
                         </TableBody>
-                    }
                 })
             }
         </TableMaterial>
