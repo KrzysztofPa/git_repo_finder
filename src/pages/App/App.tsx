@@ -18,9 +18,9 @@ export const App = (): JSX.Element => {
             <CssBaseline/>
             <Container component="main" maxWidth="xs">
                 <Form setSearchResponse={setSearchResponse}
-                    searchResponse={searchResponse}
-                    elementsPerPage={elementsPerPage}
-                    pageNumber={pageNumber}/>
+                      searchResponse={searchResponse}
+                      elementsPerPage={elementsPerPage}
+                      pageNumber={pageNumber}/>
             </Container>
 
             <Container maxWidth="xl">

@@ -11,17 +11,23 @@ interface OwnProps {
     setPageNumber: Dispatch<number>
 }
 
-export const Pagination = ({searchResponse, elementsPerPage, setElementsPerPage,setPageNumber, pageNumber}: OwnProps): JSX.Element => {
+export const Pagination = ({
+                               searchResponse,
+                               elementsPerPage,
+                               setElementsPerPage,
+                               setPageNumber,
+                               pageNumber
+                           }: OwnProps): JSX.Element => {
 
     const selectValuePerPages = [10, 20, 30, 50, 100]
 
-    const [pages, setPages] = useState<number>( 1)
+    const [pages, setPages] = useState<number>(1)
 
-    useEffect(()=>{
-        if("error" !== searchResponse && undefined !== searchResponse){
-            setPages(Math.ceil(searchResponse.total_count/elementsPerPage))
+    useEffect(() => {
+        if ("error" !== searchResponse && undefined !== searchResponse) {
+            setPages(Math.ceil(searchResponse.total_count / elementsPerPage))
         }
-    },[elementsPerPage,searchResponse])
+    }, [elementsPerPage, searchResponse])
 
     if (undefined === searchResponse || "error" === searchResponse || 0 === searchResponse.total_count) {
         return <></>
@@ -38,11 +44,11 @@ export const Pagination = ({searchResponse, elementsPerPage, setElementsPerPage,
               alignItems="center"
               sx={{mt: 3}}>
             <Grid item xs={8}>
-                 Total found: {searchResponse.total_count}
+                Total found: {searchResponse.total_count}
             </Grid>
-                <Grid item xs={2}>
+            <Grid item xs={2}>
                 Per page:
-                </Grid>
+            </Grid>
             <Grid item xs={2}>
                 <Select
                     name="elPerPage"

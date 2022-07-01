@@ -5,7 +5,7 @@ const gitInstance = axios.create({
     baseURL: 'https://api.github.com/',
 });
 
-export const getData = (phrase: string, username: string, lang: string, perPage: number, page:number): AxiosPromise<SearchResponse> => {
+export const getData = (phrase: string, username: string, lang: string, perPage: number, page: number): AxiosPromise<SearchResponse> => {
 
     const createUrl = () => {
         phrase = phrase.split(' ').join('+');

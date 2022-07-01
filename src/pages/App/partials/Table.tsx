@@ -18,15 +18,15 @@ interface OwnProps {
 export const Table = ({searchResponse}: OwnProps): JSX.Element => {
 
 
-    if(undefined === searchResponse){
-       return  <Alert severity="info">Search for something</Alert>
+    if (undefined === searchResponse) {
+        return <Alert severity="info">Search for something</Alert>
     }
 
-    if('error' === searchResponse){
+    if ('error' === searchResponse) {
         return <Alert severity="error">Something went wrong</Alert>
     }
 
-    if(0 === searchResponse.total_count){
+    if (0 === searchResponse.total_count) {
         return <Alert severity="warning">Nothing found</Alert>
     }
 
@@ -41,26 +41,26 @@ export const Table = ({searchResponse}: OwnProps): JSX.Element => {
                 </TableRow>
             </TableHead>
             {searchResponse.items.map((item, idx) => {
-                        return <TableBody key={"id" + item.path + idx}>
-                            <TableRow
-                                sx={{'&:last-child td, &:last-child th': {border: 0}}}
-                            >
-                                <TableCell >{item.name}
-                                </TableCell>
-                                <TableCell >
-                                    <a href={item.html_url} target="_blank">
-                                        <img src={ghLogo} alt="go to GitLab" />
-                                    </a>
-                                </TableCell>
-                                <TableCell align="right">
-                                    {item.repository.description}
-                                </TableCell>
-                                <TableCell align="right">
-                                    <a href={item.repository.owner.avatar_url} target="_blank">{item.repository.owner.login}</a>
-                                </TableCell>
-                            </TableRow>
-                        </TableBody>
-                })
+                return <TableBody key={"id" + item.path + idx}>
+                    <TableRow
+                        sx={{'&:last-child td, &:last-child th': {border: 0}}}
+                    >
+                        <TableCell>{item.name}
+                        </TableCell>
+                        <TableCell>
+                            <a href={item.html_url} ref="" target="_blank" rel="noopener noreferrer">
+                                <img src={ghLogo} alt="go to GitLab"/>
+                            </a>
+                        </TableCell>
+                        <TableCell align="right">
+                            {item.repository.description}
+                        </TableCell>
+                        <TableCell align="right">
+                            <a href={item.repository.owner.avatar_url} target="_blank" rel="noopener noreferrer">{item.repository.owner.login}</a>
+                        </TableCell>
+                    </TableRow>
+                </TableBody>
+            })
             }
         </TableMaterial>
     </TableContainer>

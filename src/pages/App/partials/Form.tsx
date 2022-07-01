@@ -137,13 +137,13 @@ export const Form = ({setSearchResponse, elementsPerPage, pageNumber, searchResp
         >
             {isLoading ? <CircularProgress color="warning" size={24}/>
                 : <>
-                    <Typography sx={{mb:0}} variant="body1" gutterBottom component="div">Search</Typography>
+                    <Typography sx={{mb: 0}} variant="body1" gutterBottom component="div">Search</Typography>
                     <SearchIcon sx={{verticalAlign: 'bottom'}}/>
                 </>}
-                </Button>
-                <Grid container justifyContent="flex-end">
-                <Grid item>
-                </Grid>
-                </Grid>
-                </Box>
-            }
+        </Button>
+        <Grid container justifyContent="flex-end">
+            <Grid item>
+            </Grid>
+        </Grid>
+    </Box>
+}
