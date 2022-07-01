@@ -1,12 +1,11 @@
 import {getData} from "../../../Api/api";
-import {ChangeEvent, Dispatch, FormEvent, useEffect, useState} from "react";
+import {ChangeEvent, Dispatch, useEffect, useState} from "react";
 import {SearchResponse} from "../../../Api/api.types";
 import {
     Alert,
     Box,
     Button,
     CircularProgress,
-    FormControl,
     Grid,
     MenuItem,
     Select,
